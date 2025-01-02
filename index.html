@@ -52,32 +52,37 @@
 
       function handleRouting() {
         const path = window.location.pathname.substring(1);
+        const hash = window.location.hash.substring(1);
+        let target = hash || path;
     
-        if (path === 'terms') {
-          // Redirect to the "terms" section within your index.html
-          window.location.href = '#terms'; // Use a hash for internal navigation
-        } else if (path === 'about') {
-          window.location.href = '#about';
-        } else if (path === '') {
-            //If root, do nothing
-        } else {
-            window.location.href = '#404';
+        if (target === 'terms') {
+          showContent('terms');
+        } else if (target === 'about') {
+          showContent('about');
+        } else if (target === '404'){
+            showContent('404');
         }
-      }
+        else {
+          showContent('home'); // Default content
+            window.history.pushState({}, '', '/');
+        }
+    }
+
+    function showContent(id) {
+        document.querySelectorAll('.page-content').forEach(el => el.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    }
     
-      window.onload = handleRouting;
+    window.onload = handleRouting;
+    window.onpopstate = handleRouting;
     
-      function handleLinkClick(event) {
-          event.preventDefault();
-          const clickedUrl = event.target.href;
-          const path = clickedUrl.split('/').pop();
-          window.history.pushState({}, '', '/' + path);
-          handleRouting();
-      }
-  
-      window.onpopstate = function(event) {
-          handleRouting();
-      };
+    function handleLinkClick(event) {
+        event.preventDefault();
+        const clickedUrl = event.target.href;
+        const path = clickedUrl.split('/').pop();
+        window.history.pushState({}, '', '/' + path);
+        handleRouting();
+    }
       
     </script>
 
