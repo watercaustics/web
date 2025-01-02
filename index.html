@@ -4,6 +4,76 @@
   <head>    
     <meta charset="utf-8" />
 
+
+    <script>
+        function showContent(id) {
+            document.querySelectorAll('.page-content').forEach(el => el.style.display = 'none');
+            const target = document.getElementById(id);
+            if (target) {
+                target.style.display = 'block';
+            } else {
+                document.getElementById('404').style.display = 'block';
+            }
+        }
+
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1);
+            showContent(hash || 'home');
+        }
+
+        window.addEventListener('load', handleHashChange);
+        window.addEventListener('hashchange', handleHashChange);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a.framer-text'); // Select links with the correct class
+            links.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent default link behavior
+                    const href = this.getAttribute('href');
+                    if (href.startsWith("./")) { // Check if it is a relative link
+                        const path = href.substring(2); // Remove "./"
+                        window.location.hash = path; // Update the hash
+                    } else if (href.startsWith("#")){
+                        window.location.hash = href.substring(1);
+                    }
+                    else if (href == "/"){
+                        window.location.hash = "";
+                    }
+                });
+            });
+        });
+
+    </script>
+    <style>
+        .page-content { display: none; }
+        #home { display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="framer-1izdun6" style="outline:none;display:flex;flex-direction:column;justify-content:flex-start;flex-shrink:0;--extracted-r6o4lv:var(--token-ada03814-c2f9-45f4-9337-d41933d527fe, rgb(246, 246, 246));transform:none" data-framer-component-type="RichTextContainer">
+        <p style="--framer-font-size:14px;--framer-text-color:var(--extracted-r6o4lv, var(--token-ada03814-c2f9-45f4-9337-d41933d527fe, rgb(246, 246, 246)))" class="framer-text">
+            <a class="framer-text framer-styles-preset-47yra7" data-styles-preset="zYHKkDNrW" href="./showcase">Showcase</a>
+        </p>
+    </div>
+    <div class="framer-1izdun6" style="outline:none;display:flex;flex-direction:column;justify-content:flex-start;flex-shrink:0;--extracted-r6o4lv:var(--token-ada03814-c2f9-45f4-9337-d41933d527fe, rgb(246, 246, 246));transform:none" data-framer-component-type="RichTextContainer">
+        <p style="--framer-font-size:14px;--framer-text-color:var(--extracted-r6o4lv, var(--token-ada03814-c2f9-45f4-9337-d41933d527fe, rgb(246, 246, 246)))" class="framer-text">
+            <a class="framer-text framer-styles-preset-47yra7" data-styles-preset="zYHKkDNrW" href="./terms">Terms of Service</a>
+        </p>
+    </div>
+        <div class="framer-1izdun6" style="outline:none;display:flex;flex-direction:column;justify-content:flex-start;flex-shrink:0;--extracted-r6o4lv:var(--token-ada03814-c2f9-45f4-9337-d41933d527fe, rgb(246, 246, 246));transform:none" data-framer-component-type="RichTextContainer">
+        <p style="--framer-font-size:14px;--framer-text-color:var(--extracted-r6o4lv, var(--token-ada03814-c2f9-45f4-9337-d41933d527fe, rgb(246, 246, 246)))" class="framer-text">
+            <a class="framer-text framer-styles-preset-47yra7" data-styles-preset="zYHKkDNrW" href="/">Home</a>
+        </p>
+    </div>
+
+    <div id="home" class="page-content"><h1>Home</h1><p>Main content.</p></div>
+    <div id="showcase" class="page-content"><h1>Showcase</h1><p>Showcase content.</p></div>
+    <div id="terms" class="page-content"><h1>Terms and Conditions</h1><p>Your terms content.</p></div>
+        <div id="404" class="page-content"><h1>404</h1><p>Page not found</p></div>
+</body>
+</html>
+    
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content="Framer 92d6359" />
     <title>Dexity Studios</title>
