@@ -6055,30 +6055,30 @@
     ></div>
 
     
-  <script>
-    // Wait for Framer to be fully loaded
-    window.addEventListener('load', function() {
-      const redirectPath = sessionStorage.getItem('redirectPath');
-      if (redirectPath) {
-        // Clear the stored path
-        sessionStorage.removeItem('redirectPath');
-        
-        // Update the URL without triggering a page reload
-        window.history.replaceState({}, '', redirectPath);
-        
-        // Find and click the corresponding navigation link
-        const links = document.querySelectorAll('a[href]');
-        const targetLink = Array.from(links).find(link => {
-          const href = link.getAttribute('href');
-          return href && redirectPath.includes(href.replace('./', '/'));
-        });
-        
-        if (targetLink) {
-          targetLink.click();
+    <script>
+      // Wait for Framer to be fully loaded
+      window.addEventListener('load', function() {
+        const redirectPath = sessionStorage.getItem('redirectPath');
+        if (redirectPath) {
+          // Clear the stored path
+          sessionStorage.removeItem('redirectPath');
+          
+          // Update the URL without triggering a page reload
+          window.history.replaceState({}, '', redirectPath);
+          
+          // Find and click the corresponding navigation link
+          const links = document.querySelectorAll('a[href]');
+          const targetLink = Array.from(links).find(link => {
+            const href = link.getAttribute('href');
+            return href && redirectPath.includes(href.replace('./', '/'));
+          });
+          
+          if (targetLink) {
+            targetLink.click();
+          }
         }
-      }
-    });
-  </script>
+      });
+    </script>
 
     
   </body>
