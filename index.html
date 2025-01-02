@@ -7,6 +7,76 @@
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content="Framer 92d6359" />
     <title>Dexity Studios</title>
+    <script>
+    function handleRouting() {
+        const path = window.location.pathname.substring(1);
+        const hash = window.location.hash.substring(1);
+        let target = hash || path;
+    
+        if (target === 'terms') {
+          showContent('terms');
+        } else if (target === 'about') {
+          showContent('about');
+        } else if (target === '404'){
+            showContent('404');
+        }
+        else {
+          showContent('home'); // Default content
+            window.history.pushState({}, '', '/');
+        }
+    }
+    
+    function showContent(id) {
+        document.querySelectorAll('.page-content').forEach(el => el.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    }
+    
+    window.onload = handleRouting;
+    window.onpopstate = handleRouting;
+    
+    function handleLinkClick(event) {
+        event.preventDefault();
+        const clickedUrl = event.target.href;
+        const path = clickedUrl.split('/').pop();
+        window.history.pushState({}, '', '/' + path);
+        handleRouting();
+    }
+    </script>
+    <style>
+    .page-content {
+        display: none; /* Hide all content by default */
+    }
+    #home{
+        display:block;
+    }
+    </style>
+    </head>
+    <body>
+    <nav>
+        <a href="./terms" onclick="handleLinkClick(event)">Terms of Service</a>
+        <a href="./about" onclick="handleLinkClick(event)">About Us</a>
+        <a href="./" onclick="handleLinkClick(event)">Home</a>
+    </nav>
+    
+    <div id="home" class="page-content">
+        <h1>Home</h1>
+        <p>Main content.</p>
+    </div>
+    <div id="terms" class="page-content">
+        <h1>Terms and Conditions</h1>
+        <p>Your terms content.</p>
+    </div>
+    <div id="about" class="page-content">
+        <h1>About Us</h1>
+        <p>About content.</p>
+    </div>
+    <div id="404" class="page-content">
+        <h1>404</h1>
+        <p>Page not found</p>
+    </div>
+    
+    </body>
+    </html>
     <meta
       name="description"
       content="Dexity Studios, an official Minecraft partner, is the team you need for high-quality services from top freelancers &amp; Minecraft builders at competitive, best-in-class rates. Ranging from Design, Animation, Video, Development and more, we've got you covered"
@@ -49,41 +119,6 @@
       function gtag(){window.dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-2RBTKKN1DD');
-
-      function handleRouting() {
-        const path = window.location.pathname.substring(1);
-        const hash = window.location.hash.substring(1);
-        let target = hash || path;
-    
-        if (target === 'terms') {
-          showContent('terms');
-        } else if (target === 'about') {
-          showContent('about');
-        } else if (target === '404'){
-            showContent('404');
-        }
-        else {
-          showContent('home'); // Default content
-            window.history.pushState({}, '', '/');
-        }
-    }
-
-    function showContent(id) {
-        document.querySelectorAll('.page-content').forEach(el => el.style.display = 'none');
-        document.getElementById(id).style.display = 'block';
-    }
-    
-    window.onload = handleRouting;
-    window.onpopstate = handleRouting;
-    
-    function handleLinkClick(event) {
-        event.preventDefault();
-        const clickedUrl = event.target.href;
-        const path = clickedUrl.split('/').pop();
-        window.history.pushState({}, '', '/' + path);
-        handleRouting();
-    }
-      
     </script>
 
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
