@@ -6053,5 +6053,22 @@
       style="position: absolute; overflow: hidden; bottom: 0; left: 0; width: 0; height: 0; z-index: 0; contain: strict"
       aria-hidden="true"
     ></div>
+
+    
+    <script>
+      // Check if we have a redirect path stored
+      const redirectPath = sessionStorage.getItem('redirectPath');
+      if (redirectPath) {
+        // Clear the stored path
+        sessionStorage.removeItem('redirectPath');
+        
+        // Handle the redirect in your routing logic
+        // This will depend on your specific routing implementation
+        // For example, if using the History API:
+        window.history.replaceState(null, '', redirectPath);
+      }
+    </script>
+
+    
   </body>
 </html>
