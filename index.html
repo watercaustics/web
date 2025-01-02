@@ -1,38 +1,7 @@
 <!doctype html>
 
 <html lang="en">
-  <head>
-      <script>
-      function handleRouting() {
-        const path = window.location.pathname.substring(1);
-    
-        if (path === 'terms') {
-          // Redirect to the "terms" section within your index.html
-          window.location.href = '#terms'; // Use a hash for internal navigation
-        } else if (path === 'about') {
-          window.location.href = '#about';
-        } else if (path === '') {
-            //If root, do nothing
-        } else {
-            window.location.href = '#404';
-        }
-      }
-    
-      window.onload = handleRouting;
-    
-        function handleLinkClick(event) {
-            event.preventDefault();
-            const clickedUrl = event.target.href;
-            const path = clickedUrl.split('/').pop();
-            window.history.pushState({}, '', '/' + path);
-            handleRouting();
-        }
-    
-        window.onpopstate = function(event) {
-            handleRouting();
-        };
-    </script>
-    
+  <head>    
     <meta charset="utf-8" />
 
     <meta name="viewport" content="width=device-width" />
@@ -80,6 +49,36 @@
       function gtag(){window.dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-2RBTKKN1DD');
+
+      function handleRouting() {
+        const path = window.location.pathname.substring(1);
+    
+        if (path === 'terms') {
+          // Redirect to the "terms" section within your index.html
+          window.location.href = '#terms'; // Use a hash for internal navigation
+        } else if (path === 'about') {
+          window.location.href = '#about';
+        } else if (path === '') {
+            //If root, do nothing
+        } else {
+            window.location.href = '#404';
+        }
+      }
+    
+      window.onload = handleRouting;
+    
+      function handleLinkClick(event) {
+          event.preventDefault();
+          const clickedUrl = event.target.href;
+          const path = clickedUrl.split('/').pop();
+          window.history.pushState({}, '', '/' + path);
+          handleRouting();
+      }
+  
+      window.onpopstate = function(event) {
+          handleRouting();
+      };
+      
     </script>
 
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
