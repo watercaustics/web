@@ -10,27 +10,23 @@
 
     
     <script>
-        function handleRouting() {
-            const hash = window.location.hash.substring(1); // Get hash without #
-            showContent(hash || 'home'); // Show content based on hash or default to 'home'
-        }
-
         function showContent(id) {
             document.querySelectorAll('.page-content').forEach(el => el.style.display = 'none');
             const target = document.getElementById(id);
-            if(target) target.style.display = 'block'; //Only display if the element exists
-            else document.getElementById('404').style.display = 'block';
+            if (target) {
+                target.style.display = 'block';
+            } else {
+                document.getElementById('404').style.display = 'block';
+            }
         }
 
-        window.onload = handleRouting;
-        window.onhashchange = handleRouting; // df
-
-        function handleLinkClick(event) {
-            event.preventDefault();
-            const clickedUrl = event.target.href;
-            const path = clickedUrl.split('/').pop();
-            window.location.hash = path; // Update the hash directly
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1);
+            showContent(hash || 'home');
         }
+
+        window.addEventListener('load', handleHashChange); // Use addEventListener
+        window.addEventListener('hashchange', handleHashChange); // Use addEventListener
     </script>
     <style>
         .page-content { display: none; }
@@ -39,19 +35,15 @@
 </head>
 <body>
     <nav>
-        <a href="./terms" onclick="handleLinkClick(event)">Terms of Service</a>
-        <a href="./about" onclick="handleLinkClick(event)">About Us</a>
-        <a href="./" onclick="handleLinkClick(event)">Home</a>
+        <a href="#showcase">Showcase</a> <a href="#terms">Terms of Service</a> <a href="#">Home</a>
     </nav>
 
     <div id="home" class="page-content"><h1>Home</h1><p>Main content.</p></div>
+    <div id="showcase" class="page-content"><h1>Showcase</h1><p>Showcase content.</p></div>
     <div id="terms" class="page-content"><h1>Terms and Conditions</h1><p>Your terms content.</p></div>
-    <div id="about" class="page-content"><h1>About Us</h1><p>About content.</p></div>
     <div id="404" class="page-content"><h1>404</h1><p>Page not found</p></div>
-
 </body>
 </html>
-
 
 
 
