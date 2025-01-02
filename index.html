@@ -6056,30 +6056,47 @@
 
     
     <script>
-      // Wait for Framer to be fully loaded
-      window.addEventListener('load', function() {
+    window.addEventListener('load', function() {
         const redirectPath = sessionStorage.getItem('redirectPath');
         if (redirectPath) {
-          // Clear the stored path
-          sessionStorage.removeItem('redirectPath');
-          
-          // Update the URL without triggering a page reload
-          window.history.replaceState({}, '', redirectPath);
-          
-          // Find and click the corresponding navigation link
-          const links = document.querySelectorAll('a[href]');
-          const targetLink = Array.from(links).find(link => {
-            const href = link.getAttribute('href');
-            return href && redirectPath.includes(href.replace('./', '/'));
-          });
-          
-          if (targetLink) {
-            targetLink.click();
-          }
+            sessionStorage.removeItem('redirectPath');
+            
+            // Update the URL
+            window.history.replaceState({}, '', redirectPath);
+            
+            // Find all page variants that might exist in the Framer site
+            const allPageVariants = document.querySelectorAll('[data-framer-name]');
+            
+            // Get the page name from the path (e.g., 'terms' from '/terms')
+            const pageName = redirectPath.split('/').filter(Boolean)[0] || 'home';
+            
+            // Update visibility and current page markers
+            allPageVariants.forEach(variant => {
+                // Reset current page markers on all links
+                const links = variant.querySelectorAll('a[data-framer-page-link-current]');
+                links.forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href) {
+                        const linkPage = href.replace('./', '').replace('/', '') || 'home';
+                        if (linkPage === pageName) {
+                            link.setAttribute('data-framer-page-link-current', 'true');
+                        } else {
+                            link.removeAttribute('data-framer-page-link-current');
+                        }
+                    }
+                });
+            });
+    
+            // Trigger a resize event to help Framer recalculate layouts
+            window.dispatchEvent(new Event('resize'));
+            
+            // Force a repaint
+            document.body.style.display = 'none';
+            document.body.offsetHeight; // Trigger a reflow
+            document.body.style.display = '';
         }
-      });
+    });
     </script>
-
     
   </body>
 </html>
