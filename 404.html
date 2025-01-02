@@ -4,20 +4,16 @@
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script>
-      // Get the current path
-      const path = window.location.pathname;
+      // Capture the full URL before redirecting
+      const currentPath = window.location.pathname;
+      const currentSearch = window.location.search;
+      const currentHash = window.location.hash;
       
-      // Check if this is a direct navigation to a known route
-      const knownRoutes = ['/terms', '/showcase'];
-      const matchedRoute = knownRoutes.find(route => path.startsWith(route));
+      // Store the path we want to redirect to after loading the main page
+      sessionStorage.setItem('redirectPath', currentPath + currentSearch + currentHash);
       
-      if (matchedRoute) {
-        // Redirect to the appropriate directory's index.html
-        window.location.replace(matchedRoute + '/');
-      } else {
-        // For unknown routes, redirect to home
-        window.location.replace('/');
-      }
+      // Redirect to the root index.html
+      window.location.replace('/');
     </script>
   </head>
   <body>
