@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteBase /  # Adjust if your website is in a subdirectory
+RewriteRule ^(.+)$ index.html [L]
