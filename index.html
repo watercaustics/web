@@ -7,46 +7,6 @@
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content="Framer 92d6359" />
     <title>Dexity Studios</title>
-
-    
-    <script>
-        function showContent(id) {
-            document.querySelectorAll('.page-content').forEach(el => el.style.display = 'none');
-            const target = document.getElementById(id);
-            if (target) {
-                target.style.display = 'block';
-            } else {
-                document.getElementById('404').style.display = 'block';
-            }
-        }
-
-        function handleHashChange() {
-            const hash = window.location.hash.substring(1);
-            showContent(hash || 'home');
-        }
-
-        window.addEventListener('load', handleHashChange); // Use addEventListener
-        window.addEventListener('hashchange', handleHashChange); // Use addEventListener
-    </script>
-    <style>
-        .page-content { display: none; }
-        #home { display: block; }
-    </style>
-</head>
-<body>
-    <nav>
-        <a href="#showcase">Showcase</a> <a href="#terms">Terms of Service</a> <a href="#">Home</a>
-    </nav>
-
-    <div id="home" class="page-content"><h1>Home</h1><p>Main content.</p></div>
-    <div id="showcase" class="page-content"><h1>Showcase</h1><p>Showcase content.</p></div>
-    <div id="terms" class="page-content"><h1>Terms and Conditions</h1><p>Your terms content.</p></div>
-    <div id="404" class="page-content"><h1>404</h1><p>Page not found</p></div>
-</body>
-</html>
-
-
-
     <meta
       name="description"
       content="Dexity Studios, an official Minecraft partner, is the team you need for high-quality services from top freelancers &amp; Minecraft builders at competitive, best-in-class rates. Ranging from Design, Animation, Video, Development and more, we've got you covered"
