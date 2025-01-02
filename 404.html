@@ -4,14 +4,20 @@
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script>
-      // Get the current path excluding the domain
+      // Get the current path
       const path = window.location.pathname;
       
-      // Store the path in sessionStorage
-      sessionStorage.setItem('redirectPath', path);
+      // Check if this is a direct navigation to a known route
+      const knownRoutes = ['/terms', '/showcase'];
+      const matchedRoute = knownRoutes.find(route => path.startsWith(route));
       
-      // Redirect to the main page
-      window.location.replace('/');
+      if (matchedRoute) {
+        // Redirect to the appropriate directory's index.html
+        window.location.replace(matchedRoute + '/');
+      } else {
+        // For unknown routes, redirect to home
+        window.location.replace('/');
+      }
     </script>
   </head>
   <body>
