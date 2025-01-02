@@ -6055,19 +6055,30 @@
     ></div>
 
     
-    <script>
-      // Check if we have a redirect path stored
+  <script>
+    // Wait for Framer to be fully loaded
+    window.addEventListener('load', function() {
       const redirectPath = sessionStorage.getItem('redirectPath');
       if (redirectPath) {
         // Clear the stored path
         sessionStorage.removeItem('redirectPath');
         
-        // Handle the redirect in your routing logic
-        // This will depend on your specific routing implementation
-        // For example, if using the History API:
-        window.history.replaceState(null, '', redirectPath);
+        // Update the URL without triggering a page reload
+        window.history.replaceState({}, '', redirectPath);
+        
+        // Find and click the corresponding navigation link
+        const links = document.querySelectorAll('a[href]');
+        const targetLink = Array.from(links).find(link => {
+          const href = link.getAttribute('href');
+          return href && redirectPath.includes(href.replace('./', '/'));
+        });
+        
+        if (targetLink) {
+          targetLink.click();
+        }
       }
-    </script>
+    });
+  </script>
 
     
   </body>
