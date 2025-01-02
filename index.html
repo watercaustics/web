@@ -2,28 +2,7 @@
 
 <html lang="en">
   <head>
-    
-    <script>
-      // Function to handle clicks on links
-      function handleLinkClick(event) {
-        event.preventDefault(); // Prevent default link behavior (loading new page)
-        const clickedUrl = event.target.href; // Get the clicked URL
-        const path = clickedUrl.split('/').pop(); // Extract the path after the last "/"
-        
-        // Update content based on clicked path (replace with your logic)
-        if (path === 'terms') {
-          document.getElementById('content').innerHTML = '<h1>Terms and Conditions</h1>'; // Replace with your terms content
-        } else if (path === 'about') {
-          document.getElementById('content').innerHTML = '<h1>About Us</h1>'; // Replace with your about content
-        } else {
-          // Handle other paths (optional)
-        }
-      }
-    
-      // Add event listener to all links
-      const links = document.querySelectorAll('a');
-      links.forEach(link => link.addEventListener('click', handleLinkClick));
-    </script>
+  
     
     <meta charset="utf-8" />
 
